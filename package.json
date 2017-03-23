@@ -1,0 +1,9 @@
+{
+  "name": "nupac-cross",
+  "version": "0.0.1",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
