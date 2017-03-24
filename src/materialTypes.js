@@ -1,7 +1,8 @@
 module.exports = Object.freeze({
 
-  ELECTRONICS: 0,
-  FOOD: 1,
-  PHARMACEUTICALS: 2
+  BOOKS: 0,
+  ELECTRONICS: 1,
+  FOOD: 2,
+  PHARMACEUTICALS: 3
 
 });
