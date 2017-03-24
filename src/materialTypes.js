@@ -1,4 +1,6 @@
-module.exports = Object.freeze({
+'use strict';
+
+const materialTypes = {
 
   BOOKS: {
     value: 0
@@ -19,4 +21,10 @@ module.exports = Object.freeze({
     value: 3
   }
 
+};
+
+Object.keys(materialTypes).forEach((key) => {
+  materialTypes[key].parent = materialTypes;
 });
+
+module.exports = materialTypes;

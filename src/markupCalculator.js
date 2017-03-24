@@ -19,6 +19,8 @@ module.exports = {
    */
   calcTotal(params) {
 
+    this._validateParams(params);
+
     const { costInCents, material, numberOfPeople } = params;
 
     const materialMarkup = this._getMarkupForMaterial(material);
@@ -27,6 +29,22 @@ module.exports = {
     const costWithBaseMarkup = costInCents * (1 + this._BASE_MARKUP);
 
     return Math.round(costWithBaseMarkup * (1 + materialMarkup + peopleMarkup));
+  },
+
+  _validateParams(params) {
+
+    if (!Number.isInteger(params.costInCents)) {
+      throw new Error('costInCents must be a valid integer.  Got: ' + JSON.stringify(params.costInCents));
+    }
+
+    if (!params.material || params.material.parent !== materialTypes) {
+      throw new Error('material must be a valid materialTypes.  Got: ' + JSON.stringify(params.material));
+    }
+
+    if (!Number.isInteger(params.numberOfPeople)) {
+      throw new Error('numberOfPeople must be a valid integer.  Got: ' + JSON.stringify(params.numberOfPeople));
+    }
+
   },
 
   _getMarkupForMaterial(material) {

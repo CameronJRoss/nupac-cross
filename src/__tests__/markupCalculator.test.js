@@ -37,4 +37,28 @@ describe('Markup Calculator', () => {
     })).toBe(1370763);
   });
 
+  it('returns an error for a bad cost', () => {
+    expect(() => markupCalculator.calcTotal({
+      costInCents: 'abc',
+      material: materialTypes.BOOKS,
+      numberOfPeople: 4
+    })).toThrow();
+  });
+
+  it('returns an error for a bad material', () => {
+    expect(() => markupCalculator.calcTotal({
+      costInCents: 123,
+      material: 'panda',
+      numberOfPeople: 1
+    })).toThrow();
+  });
+
+  it('returns an error for a bad numberOfPeople', () => {
+    expect(() => markupCalculator.calcTotal({
+      costInCents: 123,
+      material: materialTypes.BOOKS,
+      numberOfPeople: 'hi'
+    })).toThrow();
+  });
+
 });
