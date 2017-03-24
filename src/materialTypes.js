@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * The types of materials, including their markup percentages if applicable
+ *
+ * @enum
+ */
 const materialTypes = {
 
   BOOKS: {
@@ -23,8 +28,12 @@ const materialTypes = {
 
 };
 
-Object.keys(materialTypes).forEach((key) => {
-  materialTypes[key].parent = materialTypes;
-});
+const decorateEnumValuesWithParentType = () => {
+  Object.keys(materialTypes).forEach((key) => {
+    materialTypes[key].parent = materialTypes;
+  });
+};
 
-module.exports = materialTypes;
+decorateEnumValuesWithParentType();
+
+module.exports = Object.freeze(materialTypes);

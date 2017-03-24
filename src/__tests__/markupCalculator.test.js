@@ -5,6 +5,22 @@ const markupCalculator = require('../markupCalculator');
 
 describe('Markup Calculator', () => {
 
+  it('returns 0 for zero cost', () => {
+    expect(markupCalculator.calcTotal({
+      costInCents: 0,
+      material: materialTypes.ELECTRONICS,
+      numberOfPeople: 10
+    })).toBe(0);
+  });
+
+  it('returns the correct total for 0 people', () => {
+    expect(markupCalculator.calcTotal({
+      costInCents: 1000,
+      material: materialTypes.BOOKS,
+      numberOfPeople: 0
+    })).toBe(1050);
+  });
+
   it('returns the correct total for a food request', () => {
     expect(markupCalculator.calcTotal({
       costInCents: 129999,
@@ -58,6 +74,22 @@ describe('Markup Calculator', () => {
       costInCents: 123,
       material: materialTypes.BOOKS,
       numberOfPeople: 'hi'
+    })).toThrow();
+  });
+
+  it('returns an error for a negative cost', () => {
+    expect(() => markupCalculator.calcTotal({
+      costInCents: -500,
+      material: materialTypes.BOOKS,
+      numberOfPeople: 4
+    })).toThrow();
+  });
+
+  it('returns an error for a negative number of people', () => {
+    expect(() => markupCalculator.calcTotal({
+      costInCents: 500,
+      material: materialTypes.BOOKS,
+      numberOfPeople: -5
     })).toThrow();
   });
 

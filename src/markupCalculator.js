@@ -31,18 +31,18 @@ module.exports = {
     return Math.round(costWithBaseMarkup * (1 + materialMarkup + peopleMarkup));
   },
 
-  _validateParams(params) {
+  _validateParams({costInCents, material, numberOfPeople}) {
 
-    if (!Number.isInteger(params.costInCents)) {
-      throw new Error('costInCents must be a valid integer.  Got: ' + JSON.stringify(params.costInCents));
+    if (!Number.isInteger(costInCents) || costInCents < 0) {
+      throw new Error('costInCents must be a valid integer.  Got: ' + JSON.stringify(costInCents));
     }
 
-    if (!params.material || params.material.parent !== materialTypes) {
-      throw new Error('material must be a valid materialTypes.  Got: ' + JSON.stringify(params.material));
+    if (!material || material.parent !== materialTypes) {
+      throw new Error('material must be a valid materialTypes.  Got: ' + JSON.stringify(material));
     }
 
-    if (!Number.isInteger(params.numberOfPeople)) {
-      throw new Error('numberOfPeople must be a valid integer.  Got: ' + JSON.stringify(params.numberOfPeople));
+    if (!Number.isInteger(numberOfPeople) || numberOfPeople < 0) {
+      throw new Error('numberOfPeople must be a valid integer.  Got: ' + JSON.stringify(numberOfPeople));
     }
 
   },
