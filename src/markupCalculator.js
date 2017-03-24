@@ -5,6 +5,7 @@ const materialTypes = require('./materialTypes');
 module.exports = {
 
   _BASE_MARKUP: 0.05,
+  _PEOPLE_MARKUP: 0.012,
 
   /**
    * Calculates an estimate based on item costs, number of numberOfPeople and material type.
@@ -16,10 +17,12 @@ module.exports = {
    *
    * @returns {number} the total amount estimated in cents.
    */
-  calcTotal({ costInCents, material, numberOfPeople }) {
+  calcTotal(params) {
+
+    const { costInCents, material, numberOfPeople } = params;
 
     const materialMarkup = this._getMarkupForMaterial(material);
-    const peopleMarkup = this._getMarkupForNumberOfPeople(numberOfPeople);
+    const peopleMarkup = numberOfPeople * this._PEOPLE_MARKUP;
 
     const costWithBaseMarkup = costInCents * (1 + this._BASE_MARKUP);
 
@@ -27,19 +30,11 @@ module.exports = {
   },
 
   _getMarkupForMaterial(material) {
-    if (material === materialTypes.FOOD) {
-      return 0.13;
-    } else if (material === materialTypes.PHARMACEUTICALS) {
-      return 0.075;
-    } else if (material === materialTypes.ELECTRONICS) {
-      return 0.02;
-    } else {
-      return 0;
+    const materialMarkup = material.markup;
+    if (materialMarkup) {
+      return materialMarkup;
     }
+    return 0;
   },
-
-  _getMarkupForNumberOfPeople(numberOfPeople) {
-    return numberOfPeople * 0.012;
-  }
 
 };

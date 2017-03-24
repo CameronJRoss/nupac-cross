@@ -1,8 +1,22 @@
 module.exports = Object.freeze({
 
-  BOOKS: 0,
-  ELECTRONICS: 1,
-  FOOD: 2,
-  PHARMACEUTICALS: 3
+  BOOKS: {
+    value: 0
+  },
+
+  ELECTRONICS: {
+    markup: 0.02,
+    value: 1
+  },
+
+  FOOD: {
+    markup: 0.13,
+    value: 2
+  },
+
+  PHARMACEUTICALS: {
+    markup: 0.075,
+    value: 3
+  }
 
 });
